@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   withRouter
 } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
 class Login extends Component {
@@ -43,6 +44,8 @@ class Login extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.status === 200) {
+          console.log(data)
+          Swal.fire("",data.message, 'success')
           var user = data.data[0].user;
 
           // Save user profile to local storage
@@ -60,12 +63,12 @@ class Login extends Component {
             this.props.history.push("../admin/admin-dash.html");
           }
         } else {
-          displayError(data.error);
-          console.log(data.status);
+          Swal.fire("",data.error, 'error')
+          console.log(data.error);
         }
       })
       .catch(error => {
-        displayError("Please check your connection");
+        Swal.fire("","Please check your connection", 'error')
       });
   }
   render() {
@@ -142,7 +145,7 @@ class Login extends Component {
                   <Link
                     to="/login"
                     className="ml-2"
-                    onclick="onResetPassword();"
+                    onClick="onResetPassword();"
                   >
                     Reset password
                   </Link>

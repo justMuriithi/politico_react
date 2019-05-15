@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import img from "./images/default.jpg";
 
-class Results extends Component {
+class Profile extends Component {
   render() {
+    let styles = {
+      margin: "margin-top:5rem"
+    };
     return (
       <div>
         <nav>
@@ -33,11 +37,26 @@ class Results extends Component {
           </div>
         </nav>
         <main role="main" className="container">
-          <div className="account-heading">
-            <h2>Election Results</h2>
-          </div>
           <div className="row">
-            <div id="result-list" className="col-md-2" />
+            <div className="col-md-2">
+              <div className="media" style={styles}>
+                <img className="rounded-circle account-img" src={img} />
+                <div className="media-body">
+                  <legend className="border-bottom mb-4">Account Info</legend>
+                  <h2 id="firstname">Antoine</h2>
+                  <p className="text-secondary" id="national_id">
+                    31607749
+                  </p>
+                  <p className="text-secondary" id="email">
+                    demo@demo.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h2 className="account-heading">Candidates you have voted for</h2>
+          <div className="row">
+            <div id="voting-history" className="col-md-3" />
           </div>
         </main>
       </div>
@@ -45,4 +64,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default Profile;

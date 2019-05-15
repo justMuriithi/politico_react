@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   withRouter
 } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
 class App extends Component {
@@ -43,7 +44,7 @@ class App extends Component {
     event.preventDefault();
 
     if (password !== confirm_password) {
-      displayError("Passwords do not match");
+      Swal.fire("","Passwords don't match", 'error')
       return;
     }
 
@@ -67,6 +68,7 @@ class App extends Component {
       .then(data => {
         console.log(data);
         if (data.status === 201) {
+          Swal.fire("",data.message, 'success')
           var user = data.data[0].user;
 
           // Save user profile to local storage
@@ -79,12 +81,12 @@ class App extends Component {
           // Redirect to login after successful signup
           this.props.history.push("/login");
         } else {
-          displayError(data.error);
-          console.log(data.status);
+          Swal.fire("",data.error, 'error')
+          console.log(data.error);
         }
       })
       .catch(error => {
-        displayError("Please check your connection");
+        Swal.fire("","Please check your connection", 'error')
       });
   }
 

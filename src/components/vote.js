@@ -30,7 +30,7 @@ class Vote extends Component {
               </label>
               <ul className="menu">
                 <li>
-                  <Link to="/vie">Vie</Link>
+                  <Link to="/vote">Vote</Link>
                 </li>
                 <li>
                   <Link to="/results">Results</Link>
