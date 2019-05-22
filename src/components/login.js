@@ -5,10 +5,10 @@ import {
   BrowserRouter as Router,
   withRouter
 } from "react-router-dom";
-import Swal from 'sweetalert2'
+import { connect } from "react-redux";
+import { login } from "../actions/login";
 
-const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,47 +29,8 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    const { email, password } = this.state;
     event.preventDefault();
-    fetch(`${BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 200) {
-          console.log(data)
-          Swal.fire("",data.message, 'success')
-          var user = data.data[0].user;
-
-          // Save user profile to local storage
-          localStorage.setItem("token", data.data[0].token);
-          localStorage.setItem("firstname", user.firstname);
-          localStorage.setItem("lastname", user.lastname);
-          localStorage.setItem("email", user.email);
-          localStorage.setItem("national_id", user.national_id);
-          localStorage.setItem("admin", user.admin);
-          localStorage.setItem("uid", user.id);
-          // Redirect to homepage after successful login
-          if (user.admin == false) {
-            this.props.history.push("/vote");
-          } else {
-            this.props.history.push("../admin/admin-dash.html");
-          }
-        } else {
-          Swal.fire("",data.error, 'error')
-          console.log(data.error);
-        }
-      })
-      .catch(error => {
-        Swal.fire("","Please check your connection", 'error')
-      });
+    this.props.login(this.state, this.props.history);
   }
   render() {
     return (
@@ -145,7 +106,7 @@ class Login extends Component {
                   <Link
                     to="/login"
                     className="ml-2"
-                    onClick="onResetPassword();"
+                    // onClick="onResetPassword();"
                   >
                     Reset password
                   </Link>
@@ -166,4 +127,9 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+export default withRouter(
+  connect(
+    null,
+    { login }
+  )(Login)
+);

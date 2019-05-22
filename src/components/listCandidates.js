@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { connect } from "react-redux";
 
 const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
 class ListCandidates extends Component {
@@ -54,5 +55,10 @@ class ListCandidates extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  const { user } = state;
+  console.log(user);
 
-export default ListCandidates;
+  return { user };
+}
+export default connect(mapStateToProps)(ListCandidates);
