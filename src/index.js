@@ -6,10 +6,16 @@ import Login from "./components/login";
 import Vote from "./components/vote";
 import Results from "./components/results";
 import Profile from "./components/profile";
-
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+import { login } from "./actions/login";
 
 import "./css/main.css";
 import "./css/nav.css";
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Routing = () => {
   return (
@@ -24,4 +30,10 @@ const Routing = () => {
     </Router>
   );
 };
-ReactDOM.render(<Routing />, document.getElementById("app"));
+// ReactDOM.render(<Routing />, document.getElementById("app"));
+ReactDOM.render(
+  <Provider store={store}>
+    <Routing />,
+  </Provider>,
+  document.getElementById("app")
+);
