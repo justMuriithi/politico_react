@@ -7,7 +7,7 @@ import Vote from "./components/vote";
 import Results from "./components/results";
 import Profile from "./components/profile";
 import thunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { login } from "./actions/login";
@@ -15,7 +15,9 @@ import { login } from "./actions/login";
 import "./css/main.css";
 import "./css/nav.css";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)));
 
 const Routing = () => {
   return (
