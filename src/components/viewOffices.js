@@ -46,7 +46,7 @@ class ViewOffices extends Component {
 }
 function mapStateToProps(state) {
   return {
-    offices: state.office,
+    offices: state.offices,
     user: state.user
   };
 }

@@ -3,7 +3,7 @@ import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 
 const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
-class ListCandidates extends Component {
+export class ListCandidates extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ class ListCandidates extends Component {
   render() {
     const { candidates } = this.state;
     return (
-      <div>
+      <div data-test="form-app">
         <select>
           {candidates.map(candidate => (
             <React.Fragment key={candidate.id}>

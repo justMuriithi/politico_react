@@ -92,9 +92,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div data-test="component-app">
         <nav>
-          <div className="topnav">
+          <div className="topnav" >
             <header className="header">
               <a href="" className="logo">
                 {" "}
@@ -114,7 +114,7 @@ class App extends Component {
             </div>
             <div className="col-md-2">
               <div className="content-section">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} data-test='form-app'>
                   <fieldset className="form-group">
                     <legend className="border-bottom mb-1">Join Today</legend>
                     <div className="form-group">
