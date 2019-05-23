@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import user from "./userReducer";
-import office from "./officeReducer";
+import offices from "./officeReducer";
 
 export default combineReducers({
-  user: user,
-  office: office
+  user,
+  offices
 });
