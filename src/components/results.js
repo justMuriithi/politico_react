@@ -4,7 +4,7 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 class Results extends Component {
   render() {
     return (
-      <div>
+      <div data-test='component-app'>
         <nav>
           <div className="topnav">
             <header className="header">

@@ -1,4 +1,4 @@
 export default {
-    get: jest.fn(() => Promise.resolve({ meetups: {} })),
+    get: jest.fn(() => Promise.resolve({ offices: {} })),
     post: jest.fn(() => Promise.resolve({ user: {} }))
   };

@@ -8,7 +8,7 @@ class Profile extends Component {
       margin: "margin-top:5rem"
     };
     return (
-      <div>
+      <div data-test='component-app'>
         <nav>
           <div className="topnav">
             <header className="header">
