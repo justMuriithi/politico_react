@@ -3,7 +3,7 @@ import Enzyme, { shallow, mount } from "enzyme";
 import { StaticRouter } from "react-router-dom";
 
 import EnzymeAdapter from "enzyme-adapter-react-16";
-import Login from "./login";
+import Login from "../login";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 

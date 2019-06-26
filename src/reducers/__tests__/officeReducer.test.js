@@ -1,5 +1,5 @@
-import { OFFICES } from "../actions/types";
-import officeReducer from "./officeReducer";
+import { OFFICES } from "../../actions/types";
+import officeReducer from "../officeReducer";
 
 test("Return object with empty offices array as initial state", () => {
   const newState = officeReducer(undefined, {
