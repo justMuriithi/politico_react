@@ -14,28 +14,30 @@ class ViewOffices extends Component {
     fetchAllOffices(localStorage.getItem("token"));
   }
   render() {
-    const { offices } = this.props;
+    const { offices, candidates } = this.props;
     const officeNum = Array.isArray(this.props.offices[0])
       ? this.props.offices[0]
       : [];
     const officeList = officeNum.map(office => {
       return (
-        <div className="content-section" key={office.id}>
-          <div className="media">
-            <img className="rounded-circle account-img" src={img} />
-            <div className="media-body">
-              <legend className="border-bottom mb-4">
-                {office.id}.{office.name}
-              </legend>
-              <h2>{office.category}</h2>
-              <form>
-                <div name="candidate_g" id="candidate-list-{office.id}">
-                  <ListCandidates office_id={office.id} />
-                </div>
-                <br />
-                <br />
-                <input type="submit" />
-              </form>
+        <div key={office.id} data-test='office-component-app'>
+          <div className="content-section" key={office.id}>
+            <div className="media">
+              <img className="rounded-circle account-img" src={img} />
+              <div className="media-body">
+                <legend className="border-bottom mb-4">
+                  {office.id}.{office.name}
+                </legend>
+                <h2>{office.category}</h2>
+                <form>
+                  <div name="candidate_g" id="candidate-list-{office.id}">
+                    <ListCandidates candidates={candidates} office_id={office.id} office_name={office.name} />
+                  </div>
+                  <br />
+                  <br />
+                  <input type="submit" />
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -47,7 +49,8 @@ class ViewOffices extends Component {
 function mapStateToProps(state) {
   return {
     offices: state.offices,
-    user: state.user
+    user: state.user,
+    candidates: state.candidates
   };
 }
 export default connect(
