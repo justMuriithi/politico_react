@@ -3,8 +3,6 @@ import Enzyme, { shallow, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import { ListCandidates } from "./listCandidates";
 
-Enzyme.configure({ adapter: new EnzymeAdapter(), disableLifecycleMethods:true });
-
 test("renders candidates form", () => {
   const wrapper = shallow(
     <ListCandidates
