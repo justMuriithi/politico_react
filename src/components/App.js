@@ -5,10 +5,11 @@ import {
   BrowserRouter as Router,
   withRouter
 } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
-class App extends Component {
+export class UnconnectedApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +45,7 @@ class App extends Component {
     event.preventDefault();
 
     if (password !== confirm_password) {
-      Swal.fire("","Passwords don't match", 'error')
+      Swal.fire("", "Passwords don't match", "error");
       return;
     }
 
@@ -57,36 +58,27 @@ class App extends Component {
       password
     };
 
-    fetch(`${BASE_URL}/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    })
-      .then(res => res.json())
+    axios
+      .post(`${BASE_URL}/auth/signup`, payload)
       .then(data => {
-        console.log(data);
-        if (data.status === 201) {
-          Swal.fire("",data.message, 'success')
-          var user = data.data[0].user;
-
+        if (data.data.status === 201) {
+          //Swal.fire("", data.message, "success");
+          var user = data.data.data[0].user;
           // Save user profile to local storage
-          localStorage.setItem("token", data.data[0].token);
+          localStorage.setItem("token", data.data.data[0].token);
           localStorage.setItem("firstname", user.firstname);
           localStorage.setItem("lastname", user.lastname);
           localStorage.setItem("email", user.email);
           localStorage.setItem("admin", user.admin);
           localStorage.setItem("uid", user.id);
-          // Redirect to login after successful signup
           this.props.history.push("/login");
+          // Redirect to login after successful signup
         } else {
-          Swal.fire("",data.error, 'error')
-          console.log(data.error);
+          Swal.fire("", data.error, "error");
         }
       })
       .catch(error => {
-        Swal.fire("","Please check your connection", 'error')
+        Swal.fire("", "Please check your connection", "error");
       });
   }
 
@@ -94,7 +86,7 @@ class App extends Component {
     return (
       <div data-test="component-app">
         <nav>
-          <div className="topnav" >
+          <div className="topnav">
             <header className="header">
               <a href="" className="logo">
                 {" "}
@@ -114,7 +106,7 @@ class App extends Component {
             </div>
             <div className="col-md-2">
               <div className="content-section">
-                <form onSubmit={this.handleSubmit} data-test='form-app'>
+                <form onSubmit={this.handleSubmit} data-test="form-app">
                   <fieldset className="form-group">
                     <legend className="border-bottom mb-1">Join Today</legend>
                     <div className="form-group">
@@ -244,4 +236,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default withRouter(UnconnectedApp);

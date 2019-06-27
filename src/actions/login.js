@@ -6,16 +6,13 @@ const BASE_URL = "https://murmuring-atoll-51852.herokuapp.com/api/v2";
 
 export const login = (data, history) => {
   return dispatch => {
-    axios
+    return axios
       .post(`${BASE_URL}/auth/login`, data)
       .then(data => {
-        if (data.status === 200) {
-          console.log(data);
+        if (data.data.status === 200) {
           // Swal.fire("", data.data.message, "success");
           dispatch(profileSuccess(data));
-          console.log(data.data.data[0].token);
           localStorage.setItem("token", data.data.data[0].token);
-
           history.push("/vote");
         }
       })

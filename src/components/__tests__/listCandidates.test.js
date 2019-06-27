@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
-import { ListCandidates } from "./listCandidates";
+import { ListCandidates } from "../listCandidates";
 
 test("renders candidates form", () => {
   const wrapper = shallow(
