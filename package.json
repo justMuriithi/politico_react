@@ -64,7 +64,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "fetch-mock": "^7.3.3",
     "identity-obj-proxy": "^3.0.0",
     "node-fetch": "^2.6.0",
